@@ -13,10 +13,20 @@ namespace CarsTARge22.ApplicationServices.Services
             _context = context;
         }
 
-    //    public async Task<Car> Create(CarDto dto)
-    //    {
-    //        Car car = new Car();
-    //        car.Id = Guid.NewGuid();
-    //    }
-    //}
+        public async Task<Car> Create(CarDto dto)
+        {
+            Car car = new Car();
+            car.Id = Guid.NewGuid();
+            car.Brand = dto.Brand;
+            car.Type = dto.Type;
+            car.Year = dto.Year;
+            car.CreatedAt = DateTime.Now;
+            car.ModifiedAt = DateTime.Now;
+
+            await _context.Cars.AddAsync(car);
+            await _context.SaveChangesAsync();
+
+            return car;
+        }
+    }
 }
