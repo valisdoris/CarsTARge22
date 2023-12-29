@@ -8,5 +8,6 @@ namespace CarsTARge22.Core.ServiceInterface
         Task<Car> Create(CarDto dto);
         Task<Car> DetailsAsync(Guid id);
         Task<Car> Delete(Guid Id);
+        Task<Car> Update(CarDto dto);
     }
 }

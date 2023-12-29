@@ -1,5 +1,13 @@
-﻿@model CarsTARge22.Models.Cars.CarCreateViewModel
+﻿@model CarsTARge22.Models.Cars.CarCreateUpdateViewModel
 
+@if (Model.Id.HasValue)
+{
+    <h1>Update</h1>
+}
+else
+{
+    <h1>Create</h1>
+}
 
 
 <div>
@@ -29,9 +37,17 @@
             </div>
         </div>
 
-       
+        @if(Model.Id.HasValue)
+        {
+            <input asp-action="update" asp-asp-controller="cars" type="submit" class="btn btn-primary" value="Update" />
+        }
+        else
+        {
+            <input asp-action="create" asp-asp-controller="cars" type="submit" class="btn btn-primary" value="Create" />
+        }
 
-        <input asp-action="create" asp-asp-controller="cars" type="submit" class="btn btn-primary" value="Create" />
+
+        
 
         <a asp-action="index" class="btn btn-primary">Back</a>
     </form>

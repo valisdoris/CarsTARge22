@@ -32,13 +32,13 @@ namespace CarsTARge22.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            CarCreateViewModel result = new CarCreateViewModel();
+            CarCreateUpdateViewModel result = new CarCreateUpdateViewModel();
 
-            return View(result);
+            return View("CreateUpdate", result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CarCreateViewModel vm)
+        public async Task<IActionResult> Create(CarCreateUpdateViewModel vm)
         {
 
             var dto = new CarDto()
@@ -57,6 +57,48 @@ namespace CarsTARge22.Controllers
             {
                 return RedirectToAction(nameof(Index));
 
+            }
+
+            return RedirectToAction(nameof(Index), vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var car = await _carsServices.DetailsAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarCreateUpdateViewModel();
+
+            vm.Id = car.Id;
+            vm.Brand = car.Brand;
+            vm.Type = car.Type;
+            vm.Year = car.Year;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
+
+            return View("CreateUpdate",vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(CarCreateUpdateViewModel vm)
+        {
+            var dto = new CarDto()
+            {
+                Id = vm.Id,
+                Brand = vm.Brand,
+                Type = vm.Type,
+                Year = vm.Year,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
+            };
+            var result = await _carsServices.Update(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction(nameof(Index), vm);
@@ -87,7 +129,7 @@ namespace CarsTARge22.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var car = await _carsServices.DetailsAsync(id);
-            if (car != null)
+            if (car == null)
             {
                 return NotFound();
             }
@@ -101,6 +143,19 @@ namespace CarsTARge22.Controllers
             vm.ModifiedAt = car.ModifiedAt;
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var carId = await _carsServices.DetailsAsync(id);
+            if (carId == null)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return RedirectToAction(nameof(Index));
         }
         
     }
