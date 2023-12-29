@@ -30,6 +30,10 @@
                     <td>@car.Brand</td>
                     <td>@car.Type</td>
                     <td>@car.Year</td>
+                    <td>
+                        <a asp-action="details" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-info">Details</a>
+                        <a asp-action="delete" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
                 rownumber += 1;
             }
