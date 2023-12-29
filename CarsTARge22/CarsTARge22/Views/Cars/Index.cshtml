@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<CarsTARge22.Models.Cars.CarsIndexViewModel>
 
+@{
+    int rownumber = 1;
+}
+
+<div>
+    <a asp-action="create" asp-controller="Cars" type="submit" class="btn btn-primary">Create</a>
+</div>
 <div class="h1">
     Cars
 </div>
@@ -19,10 +26,12 @@
             {
                 <tr>
                     <td></td>
+                    <td>@rownumber</td>
                     <td>@car.Brand</td>
                     <td>@car.Type</td>
                     <td>@car.Year</td>
                 </tr>
+                rownumber += 1;
             }
         </tbody>
     </table>

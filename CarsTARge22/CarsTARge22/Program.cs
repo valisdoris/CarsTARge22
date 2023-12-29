@@ -1,3 +1,6 @@
+using CarTARge22.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CarsTARge22
 {
     public class Program
@@ -9,8 +12,8 @@ namespace CarsTARge22
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //builder.Services.AddDbContext<CarsTARge22Context>(options =>
-            //options.UseSqlServer());
+            builder.Services.AddDbContext<CarTARge22Context>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
