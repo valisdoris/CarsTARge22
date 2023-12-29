@@ -2,6 +2,7 @@
 using CarTARge22.Data;
 using CarsTARge22.Core.Dto;
 using CarsTARge22.Core.ServiceInterface;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarsTARge22.ApplicationServices.Services
 {
@@ -28,6 +29,24 @@ namespace CarsTARge22.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return car;
+        }
+
+        public async Task<Car> DetailsAsync(Guid id)
+        {
+            var result = await _context.Cars
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
+        public async Task<Car> Delete(Guid Id)
+        {
+            var carId = await _context.Cars
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            _context.Cars.Remove(carId);
+            await _context.SaveChangesAsync();
+
+            return carId;
         }
     }
 }

@@ -6,5 +6,7 @@ namespace CarsTARge22.Core.ServiceInterface
     public interface ICarsServices
     {
         Task<Car> Create(CarDto dto);
+        Task<Car> DetailsAsync(Guid id);
+        Task<Car> Delete(Guid Id);
     }
 }
