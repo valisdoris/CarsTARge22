@@ -1,5 +1,9 @@
+using CarsTARge22.Core.ServiceInterface;
 using CarTARge22.Data;
 using Microsoft.EntityFrameworkCore;
+using CarsTARge22.ApplicationServices.Services;
+using CarsTARge22.Core.Domain;
+
 
 namespace CarsTARge22
 {
@@ -11,6 +15,8 @@ namespace CarsTARge22
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<ICarsServices, CarsServices>();
 
             builder.Services.AddDbContext<CarTARge22Context>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

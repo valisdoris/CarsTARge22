@@ -1,10 +1,11 @@
 ﻿using CarsTARge22.Core.Domain;
 using CarTARge22.Data;
 using CarsTARge22.Core.Dto;
+using CarsTARge22.Core.ServiceInterface;
 
 namespace CarsTARge22.ApplicationServices.Services
 {
-    public class CarsServices
+    public class CarsServices : ICarsServices
     {
         private readonly CarTARge22Context _context;
 
