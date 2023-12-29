@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CarsTARge22.Core.Dto
+{
+    public class CarDto
+    {
+        public Guid? Id { get; set; }
+        public string Brand { get; set; }
+        public string Type { get; set; }
+        public int Year { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
+    }
+}
